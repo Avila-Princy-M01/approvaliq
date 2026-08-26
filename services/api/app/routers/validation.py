@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import base64
+import binascii
 
 from fastapi import APIRouter
 
@@ -38,20 +39,25 @@ def validate_document(payload: dict) -> dict:
 
     try:
         base64.b64decode(content_b64, validate=True)
-    except Exception:
+    except (binascii.Error, ValueError):
         return {
             "valid": False,
             "missing_fields": [],
             "notes": "Document content could not be decoded. Please re-upload.",
         }
 
-        expected_fields = _EXPECTED_FIELDS.get(requirement_id, [])
-        missing = [field for field in expected_fields if field not in payload]
+    # Real field-presence checking would run here against extracted document
+    # content, using the expected field list below. Left as an explicit
+    # extension point.
+    expected_fields = _EXPECTED_FIELDS.get(requirement_id, [])
+    missing = [field for field in expected_fields if field not in payload]
 
     return {
         "valid": len(missing) == 0,
         "missing_fields": missing,
-        "notes": "Document received and passed basic structural checks."
-        if not missing
-        else f"Missing required fields: {', '.join(missing)}",
+        "notes": (
+            "Document received and passed basic structural checks."
+            if not missing
+            else f"Missing required fields: {', '.join(missing)}"
+        ),
     }

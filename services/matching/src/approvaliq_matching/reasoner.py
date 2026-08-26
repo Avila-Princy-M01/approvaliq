@@ -31,9 +31,7 @@ that is not in the candidate list above.
 """
 
 
-def confirm_applicability(
-    profile: ApplicantProfile, candidates: list[dict]
-) -> list[ChecklistItem]:
+def confirm_applicability(profile: ApplicantProfile, candidates: list[dict]) -> list[ChecklistItem]:
     """Confirm which retrieved candidates genuinely apply and build ChecklistItems.
 
     Returns an empty list if there are no candidates, or if the model call

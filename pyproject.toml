@@ -1,0 +1,12 @@
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+# B008: flags `Depends(...)` in function defaults, which is the correct,
+# idiomatic FastAPI dependency-injection pattern -- not a real bug here.
+ignore = ["B008"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
