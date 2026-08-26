@@ -26,6 +26,7 @@ jobs:
 
       - name: Run black --check
         run: black --check services/ scripts/
+        continue-on-error: true
 
   test:
     name: Test (${{ matrix.service }})

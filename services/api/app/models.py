@@ -45,6 +45,4 @@ class AuditEvent(Base):
     applicant_id: Mapped[str] = mapped_column(String, index=True)
     event_type: Mapped[str] = mapped_column(String)
     detail: Mapped[dict] = mapped_column(JSON)
-    timestamp: Mapped[datetime.datetime] = mapped_column(
-        DateTime, default=datetime.datetime.utcnow
-    )
+    timestamp: Mapped[datetime.datetime] = mapped_column(DateTime, default=datetime.datetime.utcnow)

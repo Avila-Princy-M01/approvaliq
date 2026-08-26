@@ -59,9 +59,7 @@ def match(profile: ApplicantProfile) -> list[ChecklistItem]:
     for requirement in requirements:
         if not requirement.get("embedding"):
             clause_text = requirement.get("clause_text", "")
-            requirement["embedding"] = np.array(
-                model.encode(clause_text)
-            ).tolist()
+            requirement["embedding"] = np.array(model.encode(clause_text)).tolist()
 
     candidates = retrieve_candidates(
         profile,
