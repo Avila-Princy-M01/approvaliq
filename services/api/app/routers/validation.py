@@ -45,10 +45,8 @@ def validate_document(payload: dict) -> dict:
             "notes": "Document content could not be decoded. Please re-upload.",
         }
 
-    expected = _EXPECTED_FIELDS.get(requirement_id, [])
-    # Real field-presence checking would run here against extracted document
-    # content. Left as an explicit extension point.
-    missing = []
+        expected_fields = _EXPECTED_FIELDS.get(requirement_id, [])
+        missing = [field for field in expected_fields if field not in payload]
 
     return {
         "valid": len(missing) == 0,
