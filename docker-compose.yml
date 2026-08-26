@@ -1,0 +1,69 @@
+services:
+  db:
+    image: ankane/pgvector:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: approvaliq
+      POSTGRES_PASSWORD: approvaliq
+      POSTGRES_DB: approvaliq
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U approvaliq"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  matching:
+    build:
+      context: ./services/matching
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./services/matching:/app
+      - ./data/seed:/app/data/seed
+      - ./data/seed:/app/data/seed
+      - ./data/seed:/app/data/seed
+
+  api:
+    build:
+      context: ./services/api
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      MATCHING_SERVICE_URL: http://matching:8100
+    ports:
+      - "${API_PORT:-8000}:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      matching:
+        condition: service_started
+    volumes:
+      - ./services/api:/app
+      - ./scripts:/app/scripts
+      - ./data/seed:/app/data/seed
+
+  frontend:
+    build:
+      context: ./frontend
+    restart: unless-stopped
+    environment:
+      API_BASE_URL: http://api:8000
+    ports:
+      - "${FRONTEND_PORT:-8501}:8501"
+    depends_on:
+      - api
+    volumes:
+      - ./frontend:/app
+
+volumes:
+  db_data:

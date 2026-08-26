@@ -1,0 +1,39 @@
+# Environment
+.env
+*.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+htmlcov/
+.coverage
+
+# Node / frontend
+node_modules/
+dist/
+build/
+.next/
+
+# Data / artifacts (raw sources may be large or license-restricted; keep out of git)
+data/sources/*
+!data/sources/README.md
+data/seed/*.json
+!data/seed/README.md
+*.faiss
+*.index
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# Docker
+*.pid
