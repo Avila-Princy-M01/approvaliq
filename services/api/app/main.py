@@ -6,7 +6,7 @@ from fastapi import FastAPI
 
 from .database import _engine
 from .models import Base
-from .routers import audit, checklist, review_queue, reuse, validation
+from .routers import audit, checklist, reuse, review_queue, validation
 
 app = FastAPI(title="ApprovalIQ API", version="0.1.0")
 

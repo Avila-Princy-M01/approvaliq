@@ -10,7 +10,7 @@ the call, not merely by prompt instruction.
 from __future__ import annotations
 
 from .llm_client import LLMError, generate_structured
-from .schema import ApplicantProfile, Citation, ChecklistItem
+from .schema import ApplicantProfile, ChecklistItem, Citation
 
 _PROMPT_TEMPLATE = """You are confirming which regulatory requirements apply to a specific \
 applicant, using ONLY the candidate requirements provided below. Do not introduce any \

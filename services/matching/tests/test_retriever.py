@@ -1,5 +1,4 @@
 import numpy as np
-
 from approvaliq_matching.retriever import retrieve_candidates
 from approvaliq_matching.schema import ApplicantProfile, Location, Scale
 

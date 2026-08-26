@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 
 from ..config import get_settings
 from ..database import get_db
-from ..models import AuditEvent, Applicant, ChecklistRecord
+from ..models import Applicant, AuditEvent, ChecklistRecord
 
 router = APIRouter(prefix="/api/v1", tags=["checklist"])
 
