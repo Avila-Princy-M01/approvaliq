@@ -140,12 +140,23 @@ def dry_run(payload: dict) -> dict:
     # Contradiction detection
     contradictions = detect_contradictions(documents)
 
-    # Low-confidence fields for query prediction
+    # Flattened extracted fields with confidence and verification status
+    extracted_fields: list[dict] = []
     low_conf: list[dict] = []
     for doc in documents:
         doc_id = doc.get("document_id", "unknown")
+        doc_label = doc.get("label", doc_id)
         for field_name, field_data in doc.get("fields", {}).items():
             conf = field_data.get("confidence", 1.0)
+            extracted_fields.append({
+                "field": field_name,
+                "label": field_data.get("label", field_name),
+                "value": field_data.get("value"),
+                "source_document": doc_id,
+                "source_label": doc_label,
+                "confidence": conf,
+                "verified": field_data.get("verified", False),
+            })
             if conf < 0.80:
                 low_conf.append({
                     "field": field_name,
@@ -175,6 +186,7 @@ def dry_run(payload: dict) -> dict:
         "documents_expected": len(set(mandatory_required)),
         "documents_found": len(set(mandatory_required)) - len(missing_mandatory),
         "missing_documents": missing_mandatory,
+        "extracted_fields": extracted_fields,
         "contradictions": contradictions,
         "readiness": readiness,
         "readiness_score": readiness["overall"],

@@ -181,6 +181,29 @@ class TestDryRunMismatch:
                 f"companyName mismatch should be informational, got {c['severity']}"
             )
 
+    def test_extracted_fields_present_with_confidence(self):
+        """Surfaces full extracted field list with confidence and verified flags."""
+        resp = client.post("/api/v1/dry-run", json={"document_pack": "demo-mismatch"})
+        body = resp.json()
+        assert "extracted_fields" in body
+        fields = body["extracted_fields"]
+        assert len(fields) > 0
+        for f in fields:
+            assert "field" in f
+            assert "value" in f
+            assert "confidence" in f
+            assert 0.0 <= f["confidence"] <= 1.0
+            assert "source_document" in f
+            assert "verified" in f
+
+    def test_low_confidence_field_identified(self):
+        """Low-confidence field (confidence < 0.8) is present in extracted_fields."""
+        resp = client.post("/api/v1/dry-run", json={"document_pack": "demo-mismatch"})
+        fields = resp.json()["extracted_fields"]
+        low_conf = [f for f in fields if f["confidence"] < 0.80]
+        assert len(low_conf) >= 1
+        assert any(f["field"] == "factoryAddress" for f in low_conf)
+
 
 # ---------------------------------------------------------------------------
 # /api/v1/dry-run — demo-corrected (the 76% → 98% moment)
