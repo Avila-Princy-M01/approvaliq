@@ -1,0 +1,106 @@
+[
+  {
+    "id": "building-plan",
+    "name": "Building/Factory Plan Approval",
+    "department": "Municipal Corporation / Town Planning",
+    "requiredDocuments": [
+      { "id": "factory-plan", "label": "Factory plan drawing", "mandatory": true },
+      { "id": "company-registration", "label": "Company registration proof", "mandatory": true }
+    ],
+    "statutoryDays": null,
+    "statutoryDaysClauseId": null,
+    "indicativeFee": null,
+    "feeConfidence": "unknown",
+    "dependsOn": [],
+    "baseRiskTier": "low"
+  },
+  {
+    "id": "fire-noc",
+    "name": "Fire NOC",
+    "department": "Maharashtra Fire Services",
+    "requiredDocuments": [
+      { "id": "fire-safety-form", "label": "Fire safety declaration", "mandatory": true },
+      { "id": "factory-plan", "label": "Factory plan drawing", "mandatory": true }
+    ],
+    "statutoryDays": null,
+    "statutoryDaysClauseId": null,
+    "indicativeFee": null,
+    "feeConfidence": "unknown",
+    "dependsOn": ["building-plan"],
+    "baseRiskTier": "medium"
+  },
+  {
+    "id": "mpcb-cte",
+    "name": "MPCB Consent to Establish",
+    "department": "Maharashtra Pollution Control Board",
+    "requiredDocuments": [
+      { "id": "factory-plan", "label": "Factory plan drawing", "mandatory": true },
+      { "id": "company-registration", "label": "Company registration proof", "mandatory": true }
+    ],
+    "statutoryDays": null,
+    "statutoryDaysClauseId": null,
+    "indicativeFee": null,
+    "feeConfidence": "unknown",
+    "dependsOn": ["building-plan"],
+    "baseRiskTier": "medium"
+  },
+  {
+    "id": "factory-license",
+    "name": "Factory Licence",
+    "department": "Directorate of Industrial Safety and Health",
+    "requiredDocuments": [
+      { "id": "factory-plan", "label": "Approved factory plan", "mandatory": true },
+      { "id": "company-registration", "label": "Company registration proof", "mandatory": true },
+      { "id": "worker-details", "label": "Worker strength declaration", "mandatory": true },
+      { "id": "fire-noc-copy", "label": "Fire NOC copy", "mandatory": true }
+    ],
+    "statutoryDays": null,
+    "statutoryDaysClauseId": null,
+    "indicativeFee": null,
+    "feeConfidence": "unknown",
+    "dependsOn": ["building-plan", "fire-noc"],
+    "baseRiskTier": "medium"
+  },
+  {
+    "id": "boiler-registration",
+    "name": "Boiler Registration",
+    "department": "Directorate of Steam Boilers",
+    "requiredDocuments": [
+      { "id": "boiler-certificate", "label": "Boiler test certificate", "mandatory": true }
+    ],
+    "statutoryDays": null,
+    "statutoryDaysClauseId": null,
+    "indicativeFee": null,
+    "feeConfidence": "unknown",
+    "dependsOn": ["factory-license"],
+    "baseRiskTier": "medium"
+  },
+  {
+    "id": "fssai-license",
+    "name": "FSSAI Licence",
+    "department": "Food Safety and Standards Authority",
+    "requiredDocuments": [
+      { "id": "company-registration", "label": "Company registration proof", "mandatory": true }
+    ],
+    "statutoryDays": null,
+    "statutoryDaysClauseId": null,
+    "indicativeFee": null,
+    "feeConfidence": "unknown",
+    "dependsOn": [],
+    "baseRiskTier": "low"
+  },
+  {
+    "id": "hazardous-waste-auth",
+    "name": "Hazardous Waste Authorisation",
+    "department": "Maharashtra Pollution Control Board",
+    "requiredDocuments": [
+      { "id": "factory-plan", "label": "Factory plan drawing", "mandatory": true }
+    ],
+    "statutoryDays": null,
+    "statutoryDaysClauseId": null,
+    "indicativeFee": null,
+    "feeConfidence": "unknown",
+    "dependsOn": ["mpcb-cte"],
+    "baseRiskTier": "medium"
+  }
+]

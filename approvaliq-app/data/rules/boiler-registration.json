@@ -1,0 +1,17 @@
+{
+  "ruleSetVersion": "2026.08.1",
+  "rules": [
+    {
+      "id": "boiler-registration-capacity",
+      "approvalId": "boiler-registration",
+      "description": "Boiler installed (capacity threshold, pressure co-condition not modeled)",
+      "conditions": [
+        { "field": "hasBoiler", "operator": "booleanTrue" }
+      ],
+      "logic": "all",
+      "result": "approval-required",
+      "clauseId": "boilers-act-2b",
+      "editableThreshold": { "conditionIndex": 0, "label": "Boiler installed" }
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "ruleSetVersion": "2026.08.1",
+  "rules": [
+    {
+      "id": "factory-license-workers-power",
+      "approvalId": "factory-license",
+      "description": "Worker count threshold with power",
+      "conditions": [
+        { "field": "usesPower", "operator": "booleanTrue" },
+        { "field": "employees", "operator": "gte", "value": 10, "unit": "workers" }
+      ],
+      "logic": "all",
+      "result": "approval-required",
+      "clauseId": "factories-act-2m",
+      "editableThreshold": { "conditionIndex": 1, "label": "Worker count threshold (with power)" }
+    },
+    {
+      "id": "factory-license-workers-nopower",
+      "approvalId": "factory-license",
+      "description": "Worker count threshold without power",
+      "conditions": [
+        { "field": "usesPower", "operator": "booleanFalse" },
+        { "field": "employees", "operator": "gte", "value": 20, "unit": "workers" }
+      ],
+      "logic": "all",
+      "result": "approval-required",
+      "clauseId": "factories-act-2m",
+      "editableThreshold": { "conditionIndex": 1, "label": "Worker count threshold (without power)" }
+    }
+  ]
+}
