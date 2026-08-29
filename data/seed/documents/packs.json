@@ -16,18 +16,18 @@
     ]
   },
   "demo-corrected": {
-    "description": "Corrected pack — area aligned, boiler certificate present",
+    "description": "Corrected pack — area aligned, address fixed, boiler certificate present",
     "documents": [
       "application-form",
       "corrected-factory-plan",
-      "company-registration",
+      "corrected-company-registration",
       "fire-safety-form",
       "boiler-certificate"
     ],
     "mandatory_required": [
       "application-form",
-      "factory-plan",
-      "company-registration",
+      "corrected-factory-plan",
+      "corrected-company-registration",
       "fire-safety-form",
       "boiler-certificate"
     ]

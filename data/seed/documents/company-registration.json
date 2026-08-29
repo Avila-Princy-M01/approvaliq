@@ -7,5 +7,6 @@
     "companyName":        { "value": "XYZ Foods Private Limited",    "confidence": 0.99, "verified": true  },
     "registrationNumber": { "value": "U15400PN2024PTC012345",        "confidence": 0.99, "verified": true  },
     "factoryAddress":     { "value": "Plot 41, Pune Industrial Estate, Pune 411019", "confidence": 0.71, "verified": false }
-  }
+  },
+  "note": "Address has a known plot-number typo (41 vs 14) retained for demo-mismatch. demo-corrected uses corrected-company-registration.json."
 }
