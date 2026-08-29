@@ -1,0 +1,35 @@
+{
+  "demo-mismatch": {
+    "description": "Flawed pack — blocking area mismatch + missing boiler certificate",
+    "documents": [
+      "application-form",
+      "factory-plan",
+      "company-registration",
+      "fire-safety-form"
+    ],
+    "mandatory_required": [
+      "application-form",
+      "factory-plan",
+      "company-registration",
+      "fire-safety-form",
+      "boiler-certificate"
+    ]
+  },
+  "demo-corrected": {
+    "description": "Corrected pack — area aligned, address fixed, boiler certificate present",
+    "documents": [
+      "application-form",
+      "corrected-factory-plan",
+      "corrected-company-registration",
+      "fire-safety-form",
+      "boiler-certificate"
+    ],
+    "mandatory_required": [
+      "application-form",
+      "corrected-factory-plan",
+      "corrected-company-registration",
+      "fire-safety-form",
+      "boiler-certificate"
+    ]
+  }
+}

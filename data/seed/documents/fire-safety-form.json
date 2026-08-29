@@ -1,0 +1,12 @@
+{
+  "document_id": "fire-safety-form",
+  "label": "Fire safety declaration",
+  "source": "applicant-submitted",
+  "extraction_mode": "fixture",
+  "fields": {
+    "companyName":     { "value": "XYZ Foods Pvt Ltd",                       "confidence": 0.98, "verified": false },
+    "factoryAddress":  { "value": "Plot 14, Pune Industrial Estate, Pune 411019", "confidence": 0.94, "verified": false },
+    "factoryAreaSqFt": { "value": 7500,                                      "confidence": 0.94, "verified": false },
+    "hasBoiler":       { "value": true,                                      "confidence": 0.95, "verified": false }
+  }
+}

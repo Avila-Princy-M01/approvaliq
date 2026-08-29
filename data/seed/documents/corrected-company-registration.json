@@ -1,0 +1,11 @@
+{
+  "document_id": "corrected-company-registration",
+  "label": "Company registration proof (corrected)",
+  "source": "applicant-submitted",
+  "extraction_mode": "fixture",
+  "fields": {
+    "companyName":        { "value": "XYZ Foods Pvt Ltd",                        "confidence": 0.99, "verified": true  },
+    "registrationNumber": { "value": "U15400PN2024PTC012345",                    "confidence": 0.99, "verified": true  },
+    "factoryAddress":     { "value": "Plot 14, Pune Industrial Estate, Pune 411019", "confidence": 0.97, "verified": false }
+  }
+}

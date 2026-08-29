@@ -1,0 +1,11 @@
+{
+  "document_id": "factory-plan",
+  "label": "Approved factory plan",
+  "source": "applicant-submitted",
+  "extraction_mode": "fixture",
+  "fields": {
+    "companyName":     { "value": "XYZ Foods Pvt Ltd",             "confidence": 0.97, "verified": false },
+    "factoryAddress":  { "value": "Plot 14, Pune Industrial Estate, Pune", "confidence": 0.93, "verified": false },
+    "factoryAreaSqFt": { "value": 6800,                            "confidence": 0.96, "verified": false }
+  }
+}
