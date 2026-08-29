@@ -47,7 +47,7 @@ def calculate_readiness(
     deduped_required = list(dict.fromkeys(mandatory_required))  # preserve order, dedupe
     expected = len(deduped_required)
     found = sum(1 for d in deduped_required if d.strip().lower() in uploaded_set)
-    doc_score = round((found / expected * 100)) if expected else 100
+    doc_score = round(found / expected * 100) if expected else 100
 
     # ---- Information --------------------------------------------------------
     present_fields: set[str] = set()

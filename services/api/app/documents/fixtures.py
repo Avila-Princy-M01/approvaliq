@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import json
 import pathlib
-from functools import lru_cache
+from functools import cache
 from typing import Any
 
 # Resolve path relative to this file: services/api/app/documents/ -> repo root
@@ -17,7 +17,7 @@ _REPO_ROOT = pathlib.Path(__file__).resolve().parents[4]
 _SEED_DIR = _REPO_ROOT / "data" / "seed" / "documents"
 
 
-@lru_cache(maxsize=None)
+@cache
 def _load_json(filename: str) -> dict[str, Any]:
     path = _SEED_DIR / filename
     with path.open(encoding="utf-8") as fh:
