@@ -1,0 +1,128 @@
+{
+  "packId": "demo-mismatch",
+  "uploadedDocuments": [
+    "application-form",
+    "factory-plan",
+    "company-registration",
+    "fire-safety-form"
+  ],
+  "fields": [
+    {
+      "field": "companyName",
+      "label": "Company name",
+      "value": "XYZ Foods Pvt Ltd",
+      "sourceDocument": "application-form",
+      "page": 1,
+      "confidence": 0.99,
+      "verified": true
+    },
+    {
+      "field": "companyName",
+      "label": "Company name",
+      "value": "XYZ Foods Pvt Ltd",
+      "sourceDocument": "factory-plan",
+      "page": 1,
+      "confidence": 0.97,
+      "verified": false
+    },
+    {
+      "field": "companyName",
+      "label": "Company name",
+      "value": "XYZ Foods Private Limited",
+      "sourceDocument": "company-registration",
+      "page": 1,
+      "confidence": 0.99,
+      "verified": true
+    },
+    {
+      "field": "factoryAreaSqFt",
+      "label": "Factory area",
+      "value": 7500,
+      "sourceDocument": "application-form",
+      "page": 2,
+      "confidence": 0.98,
+      "verified": false
+    },
+    {
+      "field": "factoryAreaSqFt",
+      "label": "Factory area",
+      "value": 6800,
+      "sourceDocument": "factory-plan",
+      "page": 2,
+      "confidence": 0.96,
+      "verified": false
+    },
+    {
+      "field": "factoryAreaSqFt",
+      "label": "Factory area",
+      "value": 7500,
+      "sourceDocument": "fire-safety-form",
+      "page": 1,
+      "confidence": 0.94,
+      "verified": false
+    },
+    {
+      "field": "factoryAddress",
+      "label": "Factory address",
+      "value": "Plot 14, Pune Industrial Estate, Pune 411019",
+      "sourceDocument": "application-form",
+      "page": 1,
+      "confidence": 0.95,
+      "verified": false
+    },
+    {
+      "field": "factoryAddress",
+      "label": "Factory address",
+      "value": "Plot 14, Pune Industrial Estate, Pune",
+      "sourceDocument": "factory-plan",
+      "page": 1,
+      "confidence": 0.93,
+      "verified": false
+    },
+    {
+      "field": "factoryAddress",
+      "label": "Factory address",
+      "value": "Plot 41, Pune Industrial Estate, Pune 411019",
+      "sourceDocument": "company-registration",
+      "page": 1,
+      "confidence": 0.71,
+      "verified": false
+    },
+    {
+      "field": "employeeCount",
+      "label": "Worker count",
+      "value": 80,
+      "sourceDocument": "application-form",
+      "page": 2,
+      "confidence": 0.97,
+      "verified": false
+    },
+    {
+      "field": "registrationNumber",
+      "label": "Registration no.",
+      "value": "U15400PN2024PTC012345",
+      "sourceDocument": "application-form",
+      "page": 1,
+      "confidence": 0.99,
+      "verified": true
+    },
+    {
+      "field": "registrationNumber",
+      "label": "Registration no.",
+      "value": "U15400PN2024PTC012345",
+      "sourceDocument": "company-registration",
+      "page": 1,
+      "confidence": 0.99,
+      "verified": true
+    },
+    {
+      "field": "hasBoiler",
+      "label": "Boiler installed",
+      "value": true,
+      "sourceDocument": "application-form",
+      "page": 3,
+      "confidence": 0.96,
+      "verified": false
+    }
+  ]
+}
