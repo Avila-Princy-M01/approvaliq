@@ -1,0 +1,10 @@
+{
+  "document_id": "boiler-certificate",
+  "label": "Boiler test certificate",
+  "source": "applicant-submitted",
+  "extraction_mode": "fixture",
+  "fields": {
+    "companyName":          { "value": "XYZ Foods Pvt Ltd", "confidence": 0.98, "verified": true  },
+    "boilerCapacityLitres": { "value": 500,                 "confidence": 0.98, "verified": true  }
+  }
+}

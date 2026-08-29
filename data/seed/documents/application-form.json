@@ -1,0 +1,15 @@
+{
+  "document_id": "application-form",
+  "label": "Application form",
+  "source": "applicant-submitted",
+  "extraction_mode": "fixture",
+  "fields": {
+    "companyName":        { "value": "XYZ Foods Pvt Ltd",             "confidence": 0.99, "verified": true  },
+    "registrationNumber": { "value": "U15400PN2024PTC012345",         "confidence": 0.99, "verified": true  },
+    "factoryAddress":     { "value": "Plot 14, Pune Industrial Estate, Pune 411019", "confidence": 0.95, "verified": false },
+    "factoryAreaSqFt":    { "value": 7500,                            "confidence": 0.98, "verified": false },
+    "employeeCount":      { "value": 80,                              "confidence": 0.97, "verified": false },
+    "investmentCrore":    { "value": 8,                               "confidence": 0.96, "verified": false },
+    "hasBoiler":          { "value": true,                            "confidence": 0.96, "verified": false }
+  }
+}
