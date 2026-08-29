@@ -1,0 +1,58 @@
+{
+  "documents": [
+    {
+      "id": "application-form",
+      "label": "Application form",
+      "pages": 3,
+      "expectedFields": [
+        "companyName",
+        "registrationNumber",
+        "factoryAddress",
+        "factoryAreaSqFt",
+        "employeeCount",
+        "investmentCrore",
+        "hasBoiler"
+      ]
+    },
+    {
+      "id": "factory-plan",
+      "label": "Approved factory plan",
+      "pages": 2,
+      "expectedFields": [
+        "companyName",
+        "factoryAddress",
+        "factoryAreaSqFt"
+      ]
+    },
+    {
+      "id": "company-registration",
+      "label": "Company registration proof",
+      "pages": 1,
+      "expectedFields": [
+        "companyName",
+        "registrationNumber",
+        "factoryAddress"
+      ]
+    },
+    {
+      "id": "fire-safety-form",
+      "label": "Fire safety declaration",
+      "pages": 2,
+      "expectedFields": [
+        "companyName",
+        "factoryAddress",
+        "factoryAreaSqFt",
+        "hasBoiler"
+      ]
+    },
+    {
+      "id": "boiler-certificate",
+      "label": "Boiler test certificate",
+      "pages": 1,
+      "expectedFields": [
+        "companyName",
+        "boilerCapacityLitres"
+      ]
+    }
+  ]
+}
