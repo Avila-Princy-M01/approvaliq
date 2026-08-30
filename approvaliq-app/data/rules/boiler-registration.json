@@ -10,7 +10,7 @@
       ],
       "logic": "all",
       "result": "approval-required",
-      "clauseId": "boilers-act-2b",
+      "clauseId": "ibr/indian-boilers-act-1923/section-2",
       "editableThreshold": { "conditionIndex": 0, "label": "Boiler installed" }
     }
   ]
