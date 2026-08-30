@@ -42,6 +42,7 @@ _EXPECTED_FIELDS: dict[str, list[str]] = {
 # POST /api/v1/validate  (fixed)
 # ---------------------------------------------------------------------------
 
+
 @router.post("/validate")
 def validate_document(payload: dict) -> dict:
     """Validate an uploaded document against a requirement's expected fields.
@@ -95,6 +96,7 @@ def validate_document(payload: dict) -> dict:
 # POST /api/v1/dry-run
 # ---------------------------------------------------------------------------
 
+
 @router.post("/dry-run")
 def dry_run(payload: dict) -> dict:
     """Application dry-run — checks a document pack for contradictions,
@@ -123,8 +125,9 @@ def dry_run(payload: dict) -> dict:
     try:
         pack_meta = load_pack(pack_id)
     except KeyError:
-        return {"error": f"Unknown document_pack: {pack_id!r}. "
-                         "Use 'demo-mismatch' or 'demo-corrected'."}
+        return {
+            "error": f"Unknown document_pack: {pack_id!r}. Use 'demo-mismatch' or 'demo-corrected'."
+        }
 
     documents = load_pack_documents(pack_id)
     uploaded_doc_ids: list[str] = pack_meta["documents"]
@@ -132,10 +135,7 @@ def dry_run(payload: dict) -> dict:
 
     # Missing mandatory documents
     uploaded_set = {d.strip().lower() for d in uploaded_doc_ids}
-    missing_mandatory = [
-        d for d in mandatory_required
-        if d.strip().lower() not in uploaded_set
-    ]
+    missing_mandatory = [d for d in mandatory_required if d.strip().lower() not in uploaded_set]
 
     # Contradiction detection
     contradictions = detect_contradictions(documents)
@@ -148,21 +148,25 @@ def dry_run(payload: dict) -> dict:
         doc_label = doc.get("label", doc_id)
         for field_name, field_data in doc.get("fields", {}).items():
             conf = field_data.get("confidence", 1.0)
-            extracted_fields.append({
-                "field": field_name,
-                "label": field_data.get("label", field_name),
-                "value": field_data.get("value"),
-                "source_document": doc_id,
-                "source_label": doc_label,
-                "confidence": conf,
-                "verified": field_data.get("verified", False),
-            })
-            if conf < 0.80:
-                low_conf.append({
+            extracted_fields.append(
+                {
                     "field": field_name,
-                    "doc_id": doc_id,
+                    "label": field_data.get("label", field_name),
+                    "value": field_data.get("value"),
+                    "source_document": doc_id,
+                    "source_label": doc_label,
                     "confidence": conf,
-                })
+                    "verified": field_data.get("verified", False),
+                }
+            )
+            if conf < 0.80:
+                low_conf.append(
+                    {
+                        "field": field_name,
+                        "doc_id": doc_id,
+                        "confidence": conf,
+                    }
+                )
 
     # Readiness score
     readiness = calculate_readiness(
