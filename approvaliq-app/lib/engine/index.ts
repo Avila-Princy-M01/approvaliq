@@ -9,3 +9,4 @@
 
 export { evaluateApprovals } from "./evaluate";
 export { calculateSimulationSummary } from "./summary";
+export { compareSimulations } from "./diff";

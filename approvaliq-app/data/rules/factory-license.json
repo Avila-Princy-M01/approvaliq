@@ -11,7 +11,7 @@
       ],
       "logic": "all",
       "result": "approval-required",
-      "clauseId": "factories-act-2m",
+      "clauseId": "dgfasli/factories-act-1948/section-2m",
       "editableThreshold": { "conditionIndex": 1, "label": "Worker count threshold (with power)" }
     },
     {
@@ -24,7 +24,7 @@
       ],
       "logic": "all",
       "result": "approval-required",
-      "clauseId": "factories-act-2m",
+      "clauseId": "dgfasli/factories-act-1948/section-2m",
       "editableThreshold": { "conditionIndex": 1, "label": "Worker count threshold (without power)" }
     }
   ]
