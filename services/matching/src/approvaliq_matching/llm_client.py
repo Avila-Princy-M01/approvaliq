@@ -32,7 +32,9 @@ def generate_structured(prompt: str, *, timeout_s: float = 20.0) -> dict[str, An
     of silent failure this service is designed to avoid.
     """
     raw_text = _dispatch(prompt, timeout_s=timeout_s)
-    cleaned = raw_text.strip().removeprefix("```json").removeprefix("```").removesuffix("```").strip()
+    cleaned = (
+        raw_text.strip().removeprefix("```json").removeprefix("```").removesuffix("```").strip()
+    )
     try:
         return json.loads(cleaned)
     except json.JSONDecodeError as exc:
@@ -109,6 +111,7 @@ def _call_groq(prompt: str, *, timeout_s: float) -> str:
 
             if attempt < 2:
                 import time
+
                 time.sleep(1 * (attempt + 1))
             else:
                 raise LLMError(
@@ -121,13 +124,13 @@ def _call_groq(prompt: str, *, timeout_s: float) -> str:
 
             if attempt < 2:
                 import time
+
                 time.sleep(1 * (attempt + 1))
             else:
-                raise LLMError(
-                    f"Groq network failure after 3 attempts: {exc}"
-                ) from exc
+                raise LLMError(f"Groq network failure after 3 attempts: {exc}") from exc
 
     raise LLMError(f"Groq request failed: {last_error}")
+
 
 def _call_anthropic(prompt: str, *, timeout_s: float) -> str:
     response = httpx.post(

@@ -46,9 +46,7 @@ def test_model_referencing_unknown_id_is_dropped():
 
 
 def test_applies_false_is_excluded():
-    mock_response = [
-        {"requirement_id": "R1", "applies": False, "justification": "Does not apply."}
-    ]
+    mock_response = [{"requirement_id": "R1", "applies": False, "justification": "Does not apply."}]
     with patch("approvaliq_matching.reasoner.generate_structured", return_value=mock_response):
         result = confirm_applicability(_PROFILE, _CANDIDATES)
     assert result == []
