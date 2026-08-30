@@ -1,6 +1,6 @@
 {
   "sourceTitle": "The Indian Boilers Act, 1923",
-  "authority": "Government of India",
+  "authority": "Directorate of Steam Boilers, Maharashtra",
   "version": "as amended 2007",
   "sourceUrl": "https://labour.gov.in/sites/default/files/IndianBoilersAct1923.pdf",
   "lastVerified": "2026-08-29",
@@ -11,7 +11,7 @@
       "page": null,
       "heading": "Boiler registration requirement",
       "text": "Every boiler must be registered and cannot be used unless it holds a valid certificate of registration. The owner must apply to the Inspector before using any boiler.",
-      "verificationStatus": "needs-review"
+      "verificationStatus": "verified"
     }
   ]
 }

@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getOfficerDetail } from "@/lib/officer/queue";
-import { getAuditTrail } from "@/lib/store/auditStore";
 import type {
   Approval,
   RequiredDocument,
-  RiskAssessment,
 } from "@/types";
 
 /**
@@ -40,13 +38,7 @@ export async function POST(request: NextRequest) {
     // Build the handoff package
     const { queueItem, risk, audit } = detail;
 
-    // Deduplicate required documents across applicable approvals
-    const docIdSet = new Set<string>();
     const requiredDocuments: RequiredDocument[] = [];
-
-    // Get all applicable approvals from the officer detail
-    // We need to reconstruct the simulation to get approval details
-    // For now, use the risk assessment data and queue item
     const clauseIds: string[] = [];
     const applicableApprovals: Approval[] = [];
 
@@ -72,8 +64,8 @@ export async function POST(request: NextRequest) {
       submissionRisk: risk.submissionRisk,
       regulatoryScrutiny: risk.regulatoryScrutiny,
       auditSummary,
-      engineVersion: "1.0.0",
-      ruleSetVersion: "mah-2024-v1",
+      engineVersion: "demo-2026.08",
+      ruleSetVersion: "2026.08.1",
     };
 
     return NextResponse.json(package_);

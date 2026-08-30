@@ -13,7 +13,7 @@ import type {
   RiskAssessment,
   OfficerQueueItem,
 } from "@/types";
-import { simulate } from "@/lib/simulation/simulate";
+import { evaluateApprovals, calculateSimulationSummary } from "@/lib/engine";
 import {
   computeSubmissionRisk,
   computeRegulatoryScrutiny,
@@ -58,8 +58,19 @@ function ensureSeeded(): void {
   for (const profile of businesses) {
     const applicationId = profile.id ?? `app-${Math.random().toString(36).slice(2)}`;
 
-    // Run simulation
-    const simulationResult = simulate(profile);
+    // Run unified engine simulation
+    const approvals = evaluateApprovals(profile);
+    const summary = calculateSimulationSummary(approvals);
+    const now = new Date().toISOString();
+
+    const simulationResult: SimulationResult = {
+      profile,
+      approvals,
+      summary,
+      engineVersion: "demo-2026.08",
+      ruleSetVersion: "2026.08.1",
+      generatedAt: now,
+    };
 
     // Run a minimal dry-run (no real document pack for seed data)
     const dryRunResult: DryRunResult | null = null;
@@ -82,7 +93,6 @@ function ensureSeeded(): void {
       simulationResult
     );
 
-    const now = new Date().toISOString();
     const record: ApplicationRecord = {
       applicationId,
       profile,

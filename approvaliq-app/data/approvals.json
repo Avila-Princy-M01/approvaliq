@@ -1,11 +1,24 @@
 [
   {
     "id": "building-plan",
-    "name": "Building/Factory Plan Approval",
+    "name": "Building / Factory Plan Approval",
     "department": "Municipal Corporation / Town Planning",
     "requiredDocuments": [
-      { "id": "factory-plan", "label": "Factory plan drawing", "mandatory": true },
-      { "id": "company-registration", "label": "Company registration proof", "mandatory": true }
+      {
+        "id": "application-form",
+        "label": "Common application form",
+        "mandatory": true
+      },
+      {
+        "id": "factory-plan",
+        "label": "Factory layout / plan drawing",
+        "mandatory": true
+      },
+      {
+        "id": "company-registration",
+        "label": "Company registration proof",
+        "mandatory": true
+      }
     ],
     "statutoryDays": null,
     "statutoryDaysClauseId": null,
@@ -17,10 +30,23 @@
   {
     "id": "fire-noc",
     "name": "Fire NOC",
-    "department": "Maharashtra Fire Services",
+    "department": "Directorate of Maharashtra Fire Services",
     "requiredDocuments": [
-      { "id": "fire-safety-form", "label": "Fire safety declaration", "mandatory": true },
-      { "id": "factory-plan", "label": "Factory plan drawing", "mandatory": true }
+      {
+        "id": "application-form",
+        "label": "Common application form",
+        "mandatory": true
+      },
+      {
+        "id": "factory-plan",
+        "label": "Factory layout / plan drawing",
+        "mandatory": true
+      },
+      {
+        "id": "fire-safety-form",
+        "label": "Fire safety declaration",
+        "mandatory": true
+      }
     ],
     "statutoryDays": null,
     "statutoryDaysClauseId": null,
@@ -34,8 +60,31 @@
     "name": "MPCB Consent to Establish",
     "department": "Maharashtra Pollution Control Board",
     "requiredDocuments": [
-      { "id": "factory-plan", "label": "Factory plan drawing", "mandatory": true },
-      { "id": "company-registration", "label": "Company registration proof", "mandatory": true }
+      {
+        "id": "application-form",
+        "label": "Common application form",
+        "mandatory": true
+      },
+      {
+        "id": "factory-plan",
+        "label": "Factory layout / plan drawing",
+        "mandatory": true
+      },
+      {
+        "id": "company-registration",
+        "label": "Company registration proof",
+        "mandatory": true
+      },
+      {
+        "id": "process-note",
+        "label": "Process, product and raw-material declaration",
+        "mandatory": true
+      },
+      {
+        "id": "effluent-details",
+        "label": "Effluent / emission details",
+        "mandatory": true
+      }
     ],
     "statutoryDays": null,
     "statutoryDaysClauseId": null,
@@ -49,10 +98,31 @@
     "name": "Factory Licence",
     "department": "Directorate of Industrial Safety and Health",
     "requiredDocuments": [
-      { "id": "factory-plan", "label": "Approved factory plan", "mandatory": true },
-      { "id": "company-registration", "label": "Company registration proof", "mandatory": true },
-      { "id": "worker-details", "label": "Worker strength declaration", "mandatory": true },
-      { "id": "fire-noc-copy", "label": "Fire NOC copy", "mandatory": true }
+      {
+        "id": "application-form",
+        "label": "Common application form",
+        "mandatory": true
+      },
+      {
+        "id": "factory-plan",
+        "label": "Factory layout / plan drawing",
+        "mandatory": true
+      },
+      {
+        "id": "company-registration",
+        "label": "Company registration proof",
+        "mandatory": true
+      },
+      {
+        "id": "worker-details",
+        "label": "Worker strength declaration",
+        "mandatory": true
+      },
+      {
+        "id": "fire-noc-copy",
+        "label": "Fire NOC copy",
+        "mandatory": true
+      }
     ],
     "statutoryDays": null,
     "statutoryDaysClauseId": null,
@@ -66,7 +136,21 @@
     "name": "Boiler Registration",
     "department": "Directorate of Steam Boilers",
     "requiredDocuments": [
-      { "id": "boiler-certificate", "label": "Boiler test certificate", "mandatory": true }
+      {
+        "id": "application-form",
+        "label": "Common application form",
+        "mandatory": true
+      },
+      {
+        "id": "boiler-certificate",
+        "label": "Boiler test certificate",
+        "mandatory": true
+      },
+      {
+        "id": "factory-plan",
+        "label": "Factory layout / plan drawing",
+        "mandatory": true
+      }
     ],
     "statutoryDays": null,
     "statutoryDaysClauseId": null,
@@ -78,12 +162,31 @@
   {
     "id": "fssai-license",
     "name": "FSSAI Licence",
-    "department": "Food Safety and Standards Authority",
+    "department": "Food Safety and Standards Authority of India / FDA Maharashtra",
     "requiredDocuments": [
-      { "id": "company-registration", "label": "Company registration proof", "mandatory": true }
+      {
+        "id": "application-form",
+        "label": "Common application form",
+        "mandatory": true
+      },
+      {
+        "id": "company-registration",
+        "label": "Company registration proof",
+        "mandatory": true
+      },
+      {
+        "id": "factory-plan",
+        "label": "Factory layout / plan drawing",
+        "mandatory": true
+      },
+      {
+        "id": "process-note",
+        "label": "Process, product and raw-material declaration",
+        "mandatory": true
+      }
     ],
-    "statutoryDays": null,
-    "statutoryDaysClauseId": null,
+    "statutoryDays": 60,
+    "statutoryDaysClauseId": "fss-reg-2011-reg2.1.4.1",
     "indicativeFee": null,
     "feeConfidence": "unknown",
     "dependsOn": [],
@@ -94,7 +197,26 @@
     "name": "Hazardous Waste Authorisation",
     "department": "Maharashtra Pollution Control Board",
     "requiredDocuments": [
-      { "id": "factory-plan", "label": "Factory plan drawing", "mandatory": true }
+      {
+        "id": "application-form",
+        "label": "Common application form",
+        "mandatory": true
+      },
+      {
+        "id": "factory-plan",
+        "label": "Factory layout / plan drawing",
+        "mandatory": true
+      },
+      {
+        "id": "hazardous-waste-details",
+        "label": "Hazardous waste stream declaration",
+        "mandatory": true
+      },
+      {
+        "id": "effluent-details",
+        "label": "Effluent / emission details",
+        "mandatory": true
+      }
     ],
     "statutoryDays": null,
     "statutoryDaysClauseId": null,

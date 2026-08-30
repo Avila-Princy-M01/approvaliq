@@ -13,12 +13,26 @@ import {
   computeSubmissionRisk,
   computeRegulatoryScrutiny,
 } from "../lib/risk/risk";
-import { simulate } from "../lib/simulation/simulate";
+import { evaluateApprovals } from "../lib/engine/evaluate";
+import { calculateSimulationSummary } from "../lib/engine/summary";
 import type {
   DocumentRiskSignals,
   BusinessProfile,
   SimulationResult,
 } from "../types/index";
+
+function buildTestSimulation(profile: BusinessProfile): SimulationResult {
+  const approvals = evaluateApprovals(profile);
+  const summary = calculateSimulationSummary(approvals);
+  return {
+    profile,
+    approvals,
+    summary,
+    engineVersion: "demo-2026.08",
+    ruleSetVersion: "2026.08.1",
+    generatedAt: new Date().toISOString(),
+  };
+}
 
 // ---------------------------------------------------------------------------
 // Property 6: Submission risk output is well-formed and level matches score
@@ -193,7 +207,7 @@ describe("Risk Engine — Property 8: regulatory scrutiny level matches factor c
           employees: Math.max(profile.employees, 10),
           usesPower: true,
         };
-        const simulation = simulate(simProfile);
+        const simulation = buildTestSimulation(simProfile);
         const applicableCount = simulation.approvals.filter((a) => a.applies).length;
         if (applicableCount >= 3) expectedFactorCount++;
 
@@ -232,7 +246,7 @@ describe("Risk Engine — Property 9: regulatory scrutiny conditional factors", 
           generatesHazardousWaste: false,
           projectStage: "operating",
         };
-        const simulation = simulate(profile);
+        const simulation = buildTestSimulation(profile);
         const result = computeRegulatoryScrutiny(profile, simulation);
         expect(result.factors.some((f) => f.label === "Boiler installation")).toBe(true);
       })
@@ -252,7 +266,7 @@ describe("Risk Engine — Property 9: regulatory scrutiny conditional factors", 
       generatesHazardousWaste: false,
       projectStage: "operating",
     };
-    const simulation = simulate(profile);
+    const simulation = buildTestSimulation(profile);
     const result = computeRegulatoryScrutiny(profile, simulation);
     expect(result.factors.some((f) => f.label === "Hazardous process or waste")).toBe(true);
   });
@@ -270,7 +284,7 @@ describe("Risk Engine — Property 9: regulatory scrutiny conditional factors", 
       generatesHazardousWaste: true,
       projectStage: "operating",
     };
-    const simulation = simulate(profile);
+    const simulation = buildTestSimulation(profile);
     const result = computeRegulatoryScrutiny(profile, simulation);
     expect(result.factors.some((f) => f.label === "Hazardous process or waste")).toBe(true);
   });
@@ -288,7 +302,7 @@ describe("Risk Engine — Property 9: regulatory scrutiny conditional factors", 
       generatesHazardousWaste: false,
       projectStage: "operating",
     };
-    const simulation = simulate(profile);
+    const simulation = buildTestSimulation(profile);
     const result = computeRegulatoryScrutiny(profile, simulation);
     expect(result.factors.some((f) => f.label === "Large workforce")).toBe(true);
   });
@@ -306,7 +320,7 @@ describe("Risk Engine — Property 9: regulatory scrutiny conditional factors", 
       generatesHazardousWaste: false,
       projectStage: "operating",
     };
-    const simulation = simulate(profile);
+    const simulation = buildTestSimulation(profile);
     const applicableCount = simulation.approvals.filter((a) => a.applies).length;
     if (applicableCount >= 3) {
       const result = computeRegulatoryScrutiny(profile, simulation);

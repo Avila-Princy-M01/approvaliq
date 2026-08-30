@@ -1,4 +1,102 @@
 {
   "ruleSetVersion": "2026.08.1",
-  "rules": []
+  "rules": [
+    {
+      "id": "building-plan-area-threshold",
+      "approvalId": "building-plan",
+      "description": "Building and layout plan approval for commercial/industrial premises",
+      "conditions": [
+        {
+          "field": "areaSqFt",
+          "operator": "gte",
+          "value": 500,
+          "unit": "sq ft"
+        }
+      ],
+      "logic": "all",
+      "result": "approval-required",
+      "clauseId": "dgfasli/factories-act-1948/section-6",
+      "editableThreshold": {
+        "conditionIndex": 0,
+        "label": "Facility Area Threshold (sq ft)"
+      }
+    },
+    {
+      "id": "fire-noc-area-safety",
+      "approvalId": "fire-noc",
+      "description": "Fire NOC requirement for industrial or commercial premises",
+      "conditions": [
+        {
+          "field": "areaSqFt",
+          "operator": "gte",
+          "value": 500,
+          "unit": "sq ft"
+        }
+      ],
+      "logic": "all",
+      "result": "approval-required",
+      "clauseId": "fire/maharashtra-fire-rules-2009/rule-4",
+      "editableThreshold": {
+        "conditionIndex": 0,
+        "label": "Fire NOC Area Minimum (sq ft)"
+      }
+    },
+    {
+      "id": "mpcb-cte-hazardous-materials",
+      "approvalId": "mpcb-cte",
+      "description": "MPCB Consent to Establish for hazardous manufacturing or process effluent",
+      "conditions": [
+        {
+          "field": "hazardousMaterials",
+          "operator": "booleanTrue"
+        }
+      ],
+      "logic": "all",
+      "result": "approval-required",
+      "clauseId": "mpcb/water-act-1974/section-25"
+    },
+    {
+      "id": "mpcb-cte-hazardous-waste",
+      "approvalId": "mpcb-cte",
+      "description": "MPCB Consent to Establish for hazardous waste generation streams",
+      "conditions": [
+        {
+          "field": "generatesHazardousWaste",
+          "operator": "booleanTrue"
+        }
+      ],
+      "logic": "all",
+      "result": "approval-required",
+      "clauseId": "mpcb/air-act-1981/section-21"
+    },
+    {
+      "id": "hazardous-waste-auth-generation",
+      "approvalId": "hazardous-waste-auth",
+      "description": "Hazardous waste management authorization requirement",
+      "conditions": [
+        {
+          "field": "generatesHazardousWaste",
+          "operator": "booleanTrue"
+        }
+      ],
+      "logic": "all",
+      "result": "approval-required",
+      "clauseId": "mpcb/hazardous-waste-rules-2016/rule-5"
+    },
+    {
+      "id": "fssai-license-food-industry",
+      "approvalId": "fssai-license",
+      "description": "FSSAI license for food processing and food product manufacturing",
+      "conditions": [
+        {
+          "field": "industry",
+          "operator": "eq",
+          "value": "food-processing"
+        }
+      ],
+      "logic": "all",
+      "result": "approval-required",
+      "clauseId": "fssai/food-safety-act-2006/section-31"
+    }
+  ]
 }

@@ -8,7 +8,7 @@
 import { describe, it, expect } from "vitest";
 import * as fc from "fast-check";
 import { buildDecisionTraces } from "../lib/explanation/explain";
-import { simulate } from "../lib/simulation/simulate";
+import { evaluateApprovals } from "../lib/engine/evaluate";
 import type { BusinessProfile } from "../types/index";
 
 // ---------------------------------------------------------------------------
@@ -32,9 +32,9 @@ describe("Decision Explanation — Property 5: decision traces are well-formed",
 
     fc.assert(
       fc.property(arbProfile, (profile) => {
-        const simulation = simulate(profile);
+        const approvals = evaluateApprovals(profile);
 
-        for (const approval of simulation.approvals) {
+        for (const approval of approvals) {
           const traces = buildDecisionTraces(profile, approval);
 
           for (const trace of traces) {

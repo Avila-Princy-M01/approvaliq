@@ -22,7 +22,6 @@ import {
   getAllClauseIds,
   getUnverifiedClauseIds,
 } from "../lib/citations/index";
-import { citationStore } from "../lib/citations/citations";
 
 // ---------------------------------------------------------------------------
 // Smoke test — sanity guard before running property tests

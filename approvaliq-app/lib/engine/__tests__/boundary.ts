@@ -22,7 +22,6 @@ import {
 } from "@/lib/engine";
 import {
   getTopologicalOrder,
-  detectCycle,
 } from "@/lib/engine/graph";
 import type { Approval, BusinessProfile } from "@/types";
 
