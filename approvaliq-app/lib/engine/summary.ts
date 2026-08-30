@@ -37,12 +37,12 @@ function longestPathDays(approvals: Approval[]): { days: number; path: string[] 
     return result;
   }
 
-  let overall = { days: 0, path: [] as string[] };
+  let overall: { days: number; path: string[] } | null = null;
   for (const a of applicable) {
     const r = walk(a.id);
-    if (r.days > overall.days) overall = r;
+    if (overall === null || r.days > overall.days) overall = r;
   }
-  return overall;
+  return overall ?? { days: 0, path: [] };
 }
 
 // ---------------------------------------------------------------------------

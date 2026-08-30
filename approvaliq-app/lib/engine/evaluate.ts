@@ -2,10 +2,11 @@ import type {
   Approval,
   BusinessProfile,
   DecisionTrace,
-  Citation,
   RequiredDocument,
   RiskTier,
 } from "@/types";
+
+import { getCitation } from "@/lib/citations";
 
 import approvalsData from "@/data/approvals.json";
 import boilerRegistrationRulesData from "@/data/rules/boiler-registration.json";
@@ -81,13 +82,6 @@ function describeCondition(field: string, operator: string, value: unknown, unit
   if (operator === "booleanTrue") return `${label} is Yes`;
   if (operator === "booleanFalse") return `${label} is No`;
   return `${label} ${opWords[operator] ?? operator} ${value}${unit ? " " + unit : ""}`;
-}
-
-// TEMPORARY SHIM — Chirag has not yet pushed lib/evidence/citations.ts.
-// Once he does, delete this function and replace its one call site below with:
-// import { getCitation } from "lib/evidence/citations" (see below for file content);
-function getCitationTemporaryShim(clauseId: string): Citation | null {
-  return null;
 }
 
 function getApplicantValue(profile: BusinessProfile, field: string): string | number | boolean {
@@ -178,6 +172,27 @@ function applyOverrides(rules: Rule[], overrides?: Override[]): Rule[] {
 }
 
 // ---------------------------------------------------------------------------
+// Rule introspection helpers — used by lib/engine/changeImpact.ts so it can
+// read the original threshold value and the condition's field name without
+// duplicating the rule-loading logic in this file.
+// ---------------------------------------------------------------------------
+
+export function getRuleCondition(
+  ruleId: string,
+  conditionIndex: number
+): RuleCondition | undefined {
+  return allRules.find((rule) => rule.id === ruleId)?.conditions[conditionIndex];
+}
+
+export function getRuleConditionValue(
+  ruleId: string,
+  conditionIndex: number
+): number | string | boolean | undefined {
+  const value = getRuleCondition(ruleId, conditionIndex)?.value;
+  return value as number | string | boolean | undefined;
+}
+
+// ---------------------------------------------------------------------------
 // Engine entry point.
 // ---------------------------------------------------------------------------
 
@@ -231,7 +246,7 @@ export function evaluateApprovals(
           expectedCondition: description,
           matched,
           clauseId: rule.clauseId,
-          citation: getCitationTemporaryShim(rule.clauseId),
+          citation: getCitation(rule.clauseId),
         };
       });
 
