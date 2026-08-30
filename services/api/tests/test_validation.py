@@ -24,6 +24,7 @@ client = TestClient(app)
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _b64(content: bytes = b"dummy pdf bytes") -> str:
     return base64.b64encode(content).decode()
 
@@ -32,12 +33,15 @@ def _b64(content: bytes = b"dummy pdf bytes") -> str:
 # /api/v1/validate — structural checks
 # ---------------------------------------------------------------------------
 
+
 class TestValidateStructural:
     def test_rejects_empty_document(self):
         resp = client.post(
             "/api/v1/validate",
-            json={"requirement_id": "factory-license",
-                  "document": {"filename": "a.pdf", "content_base64": ""}},
+            json={
+                "requirement_id": "factory-license",
+                "document": {"filename": "a.pdf", "content_base64": ""},
+            },
         )
         assert resp.status_code == 200
         body = resp.json()
@@ -47,8 +51,10 @@ class TestValidateStructural:
     def test_rejects_undecodable_content(self):
         resp = client.post(
             "/api/v1/validate",
-            json={"requirement_id": "factory-license",
-                  "document": {"filename": "a.pdf", "content_base64": "not-valid-base64!!"}},
+            json={
+                "requirement_id": "factory-license",
+                "document": {"filename": "a.pdf", "content_base64": "not-valid-base64!!"},
+            },
         )
         assert resp.status_code == 200
         assert resp.json()["valid"] is False
@@ -90,7 +96,7 @@ class TestValidateStructural:
                 "document": {
                     "filename": "empty.pdf",
                     "content_base64": _b64(),
-                    "fields": {},   # empty — all expected fields missing
+                    "fields": {},  # empty — all expected fields missing
                 },
             },
         )
@@ -118,6 +124,7 @@ class TestValidateStructural:
 # ---------------------------------------------------------------------------
 # /api/v1/dry-run — demo-mismatch
 # ---------------------------------------------------------------------------
+
 
 class TestDryRunMismatch:
     def test_returns_200(self):
@@ -209,6 +216,7 @@ class TestDryRunMismatch:
 # /api/v1/dry-run — demo-corrected (the 76% → 98% moment)
 # ---------------------------------------------------------------------------
 
+
 class TestDryRunCorrected:
     def test_returns_200(self):
         resp = client.post("/api/v1/dry-run", json={"document_pack": "demo-corrected"})
@@ -251,6 +259,7 @@ class TestDryRunCorrected:
 # ---------------------------------------------------------------------------
 # /api/v1/dry-run — error handling
 # ---------------------------------------------------------------------------
+
 
 class TestDryRunErrors:
     def test_unknown_pack_returns_error(self):

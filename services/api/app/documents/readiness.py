@@ -22,10 +22,10 @@ _REQUIRED_FIELDS = [
     "hasBoiler",
 ]
 
-_W_DOCUMENTS    = 0.35
-_W_INFORMATION  = 0.25
-_W_CONSISTENCY  = 0.25
-_W_REGULATORY   = 0.15
+_W_DOCUMENTS = 0.35
+_W_INFORMATION = 0.25
+_W_CONSISTENCY = 0.25
+_W_REGULATORY = 0.15
 
 
 def calculate_readiness(
@@ -58,29 +58,30 @@ def calculate_readiness(
 
     # ---- Consistency --------------------------------------------------------
     blocking = sum(1 for c in contradictions if c["severity"] == "blocking")
-    warning  = sum(1 for c in contradictions if c["severity"] == "warning")
-    info_c   = sum(1 for c in contradictions if c["severity"] == "informational")
+    warning = sum(1 for c in contradictions if c["severity"] == "warning")
+    info_c = sum(1 for c in contradictions if c["severity"] == "informational")
     consistency_score = max(0, 100 - (blocking * 25 + warning * 10 + info_c * 2))
 
     # ---- Regulatory ---------------------------------------------------------
     regulatory_score = (
-        100 if (blocking == 0 and present_count == len(_REQUIRED_FIELDS))
+        100
+        if (blocking == 0 and present_count == len(_REQUIRED_FIELDS))
         else round(present_count / len(_REQUIRED_FIELDS) * 100)
     )
 
     overall = round(
-        _W_DOCUMENTS   * doc_score
+        _W_DOCUMENTS * doc_score
         + _W_INFORMATION * info_score
         + _W_CONSISTENCY * consistency_score
-        + _W_REGULATORY  * regulatory_score
+        + _W_REGULATORY * regulatory_score
     )
 
     return {
-        "documents":             doc_score,
-        "information":           info_score,
-        "consistency":           consistency_score,
+        "documents": doc_score,
+        "information": info_score,
+        "consistency": consistency_score,
         "regulatory_conditions": regulatory_score,
-        "overall":               overall,
+        "overall": overall,
     }
 
 

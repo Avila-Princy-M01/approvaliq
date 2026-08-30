@@ -37,10 +37,10 @@ def predict_queries(
         )
 
     # Low-confidence fields
-    for entry in (low_confidence_fields or []):
-        field  = entry.get("field", "")
+    for entry in low_confidence_fields or []:
+        field = entry.get("field", "")
         doc_id = entry.get("doc_id", "")
-        conf   = entry.get("confidence", 0)
+        conf = entry.get("confidence", 0)
         queries.append(
             f"Please confirm the {field} recorded in the "
             f"{doc_id.replace('-', ' ')}; the submitted copy was difficult "

@@ -23,8 +23,10 @@ _SEVERITY_ORDER: dict[Severity, int] = {
 # Field comparison rules
 # ---------------------------------------------------------------------------
 
+
 def _normalise_company_name(v: Any) -> str:
     import re
+
     s = str(v).lower()
     s = re.sub(r"private limited|pvt\.? ltd\.?|pvt limited", "pvtltd", s)
     s = re.sub(r"limited|ltd\.?", "ltd", s)
@@ -34,6 +36,7 @@ def _normalise_company_name(v: Any) -> str:
 
 def _normalise_address(v: Any) -> str:
     import re
+
     s = str(v).lower()
     s = re.sub(r"\b(plot|survey|s\.?no\.?|gat)\b", "", s)
     s = re.sub(r"\b(road|rd|street|st|estate)\b", "", s)
@@ -43,13 +46,43 @@ def _normalise_address(v: Any) -> str:
 
 # Each rule: (compare_mode, tolerance_pct_or_None, severity, normalise_fn_or_None)
 _FIELD_RULES: dict[str, dict] = {
-    "factoryAreaSqFt":    {"mode": "numeric",     "tolerance": 2.0,  "severity": "blocking",      "normalise": None},
-    "investmentCrore":    {"mode": "numeric",     "tolerance": 5.0,  "severity": "warning",       "normalise": None},
-    "employeeCount":      {"mode": "numeric",     "tolerance": 10.0, "severity": "warning",       "normalise": None},
-    "companyName":        {"mode": "text",        "tolerance": None, "severity": "informational", "normalise": _normalise_company_name},
-    "factoryAddress":     {"mode": "text",        "tolerance": None, "severity": "warning",       "normalise": _normalise_address},
-    "registrationNumber": {"mode": "identifier",  "tolerance": None, "severity": "blocking",      "normalise": None},
-    "hasBoiler":          {"mode": "boolean",     "tolerance": None, "severity": "blocking",      "normalise": None},
+    "factoryAreaSqFt": {
+        "mode": "numeric",
+        "tolerance": 2.0,
+        "severity": "blocking",
+        "normalise": None,
+    },
+    "investmentCrore": {
+        "mode": "numeric",
+        "tolerance": 5.0,
+        "severity": "warning",
+        "normalise": None,
+    },
+    "employeeCount": {
+        "mode": "numeric",
+        "tolerance": 10.0,
+        "severity": "warning",
+        "normalise": None,
+    },
+    "companyName": {
+        "mode": "text",
+        "tolerance": None,
+        "severity": "informational",
+        "normalise": _normalise_company_name,
+    },
+    "factoryAddress": {
+        "mode": "text",
+        "tolerance": None,
+        "severity": "warning",
+        "normalise": _normalise_address,
+    },
+    "registrationNumber": {
+        "mode": "identifier",
+        "tolerance": None,
+        "severity": "blocking",
+        "normalise": None,
+    },
+    "hasBoiler": {"mode": "boolean", "tolerance": None, "severity": "blocking", "normalise": None},
 }
 
 _LOW_CONFIDENCE_THRESHOLD = 0.80
@@ -58,6 +91,7 @@ _LOW_CONFIDENCE_THRESHOLD = 0.80
 # ---------------------------------------------------------------------------
 # Comparison helpers
 # ---------------------------------------------------------------------------
+
 
 def _values_conflict(rule: dict, a: Any, b: Any) -> bool:
     mode = rule["mode"]
@@ -82,10 +116,10 @@ def _values_conflict(rule: dict, a: Any, b: Any) -> bool:
 
 def _recommended_action(field: str, label: str) -> str:
     actions = {
-        "factoryAreaSqFt":    "Verify the declared factory area and resubmit the corrected plan.",
-        "factoryAddress":     "Confirm the correct factory address across all submitted documents.",
+        "factoryAreaSqFt": "Verify the declared factory area and resubmit the corrected plan.",
+        "factoryAddress": "Confirm the correct factory address across all submitted documents.",
         "registrationNumber": "Ensure the company registration number is identical on all documents.",
-        "hasBoiler":          "Clarify boiler installation status — declaration and plan must agree.",
+        "hasBoiler": "Clarify boiler installation status — declaration and plan must agree.",
     }
     return actions.get(field, f"Verify the {label.lower()} across all submitted documents.")
 
@@ -118,6 +152,7 @@ def _predicted_query(field: str, label: str, doc_a: str, doc_b: str, val_a: Any,
 # Main export
 # ---------------------------------------------------------------------------
 
+
 def detect_contradictions(documents: list[dict]) -> list[dict]:
     """Detect contradictions across extracted fields from multiple documents.
 
@@ -139,12 +174,14 @@ def detect_contradictions(documents: list[dict]) -> list[dict]:
             # Skip non-dict entries (e.g. metadata strings accidentally in fields)
             if not isinstance(field_data, dict):
                 continue
-            entries.setdefault(field_name, []).append({
-                "doc_id": doc_id,
-                "label": field_name,  # will use field_name as label fallback
-                "value": field_data.get("value"),
-                "confidence": field_data.get("confidence", 1.0),
-            })
+            entries.setdefault(field_name, []).append(
+                {
+                    "doc_id": doc_id,
+                    "label": field_name,  # will use field_name as label fallback
+                    "value": field_data.get("value"),
+                    "confidence": field_data.get("confidence", 1.0),
+                }
+            )
 
     for field_name, field_entries in entries.items():
         rule = _FIELD_RULES.get(field_name)
@@ -161,20 +198,25 @@ def detect_contradictions(documents: list[dict]) -> list[dict]:
                 if cid in seen:
                     continue
                 seen.add(cid)
-                contradictions.append({
-                    "id": cid,
-                    "field": field_name,
-                    "label": field_name,
-                    "documents": [a["doc_id"], b["doc_id"]],
-                    "values": [a["value"], b["value"]],
-                    "severity": rule["severity"],
-                    "recommended_action": _recommended_action(field_name, field_name),
-                    "predicted_query": _predicted_query(
-                        field_name, field_name,
-                        a["doc_id"], b["doc_id"],
-                        a["value"], b["value"],
-                    ),
-                })
+                contradictions.append(
+                    {
+                        "id": cid,
+                        "field": field_name,
+                        "label": field_name,
+                        "documents": [a["doc_id"], b["doc_id"]],
+                        "values": [a["value"], b["value"]],
+                        "severity": rule["severity"],
+                        "recommended_action": _recommended_action(field_name, field_name),
+                        "predicted_query": _predicted_query(
+                            field_name,
+                            field_name,
+                            a["doc_id"],
+                            b["doc_id"],
+                            a["value"],
+                            b["value"],
+                        ),
+                    }
+                )
 
     # --- Low-confidence warnings --------------------------------------------
     for doc in documents:
@@ -188,22 +230,24 @@ def detect_contradictions(documents: list[dict]) -> list[dict]:
                 if cid in seen:
                     continue
                 seen.add(cid)
-                contradictions.append({
-                    "id": cid,
-                    "field": field_name,
-                    "label": field_name,
-                    "documents": [doc_id],
-                    "values": [field_data.get("value")],
-                    "severity": "warning",
-                    "recommended_action": (
-                        f"Verify the {field_name} in the {doc_id.replace('-', ' ')} "
-                        f"— extraction confidence was low ({round(conf * 100)}%)."
-                    ),
-                    "predicted_query": (
-                        f"Please confirm the {field_name} recorded in the "
-                        f"{doc_id.replace('-', ' ')}; the submitted copy was difficult to read."
-                    ),
-                })
+                contradictions.append(
+                    {
+                        "id": cid,
+                        "field": field_name,
+                        "label": field_name,
+                        "documents": [doc_id],
+                        "values": [field_data.get("value")],
+                        "severity": "warning",
+                        "recommended_action": (
+                            f"Verify the {field_name} in the {doc_id.replace('-', ' ')} "
+                            f"— extraction confidence was low ({round(conf * 100)}%)."
+                        ),
+                        "predicted_query": (
+                            f"Please confirm the {field_name} recorded in the "
+                            f"{doc_id.replace('-', ' ')}; the submitted copy was difficult to read."
+                        ),
+                    }
+                )
 
     contradictions.sort(key=lambda c: _SEVERITY_ORDER.get(c["severity"], 99))
     return contradictions
