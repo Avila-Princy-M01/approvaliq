@@ -11,6 +11,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/shared/Toaster";
 
 interface DecisionPanelProps {
   applicationId: string;
@@ -27,6 +28,7 @@ export function DecisionPanel({
   const [dialogOpen, setDialogOpen] = useState(false);
   const [pendingAction, setPendingAction] = useState<string>("");
   const [reason, setReason] = useState("");
+  const { addToast } = useToast();
 
   const isDecided = currentStatus === "approved" || currentStatus === "rejected";
 
@@ -56,8 +58,15 @@ export function DecisionPanel({
       });
 
       if (response.ok) {
+        const label = action === "approve" ? "Approved" : action === "reject" ? "Rejected" : action === "override" ? "Overridden" : "Clarification requested";
+        addToast(`${label} successfully`, "success");
         onDecisionSubmitted();
+      } else {
+        const data = await response.json();
+        addToast(data.error || "Action failed", "error");
       }
+    } catch {
+      addToast("Network error — please try again", "error");
     } finally {
       setIsLoading(false);
       setDialogOpen(false);
