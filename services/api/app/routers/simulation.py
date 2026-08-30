@@ -1,4 +1,4 @@
-"""Simulation engine: aggregates matching results into a 
+"""Simulation engine: aggregates matching results into a
 summary with timeline, fees, risk, and dependency chain.
 Supports change-diff when called with before/after profiles."""
 
@@ -83,25 +83,24 @@ def _aggregate_checklist(checklist: list[dict]) -> dict:
         if risk_scores.get(risk, 0) > risk_scores.get(highest_risk, 0):
             highest_risk = risk
 
-        approvals.append({
-            "id": item.get("requirement_id"),
-            "name": item.get("title"),
-            "department": item.get("department"),
-            "statutory_days": days,
-            "indicative_fee_inr": fee,
-            "risk_flag": risk,
-            "required_documents": required_docs,
-            "justification": item.get("justification", ""),
-            "citation": item.get("citation", {}),
-        })
+        approvals.append(
+            {
+                "id": item.get("requirement_id"),
+                "name": item.get("title"),
+                "department": item.get("department"),
+                "statutory_days": days,
+                "indicative_fee_inr": fee,
+                "risk_flag": risk,
+                "required_documents": required_docs,
+                "justification": item.get("justification", ""),
+                "citation": item.get("citation", {}),
+            }
+        )
 
     # Critical path approximation:
     # In reality this needs a DAG. For demo, use max + 30% of remaining.
     # This is honest: "estimated critical path" not "exact timeline."
-    parallelizable = sum(
-        a["statutory_days"] for a in approvals
-        if a["statutory_days"] < max_days
-    )
+    parallelizable = sum(a["statutory_days"] for a in approvals if a["statutory_days"] < max_days)
     statutory_days = max_days + int(parallelizable * 0.3)
 
     return {
@@ -124,11 +123,13 @@ def _compute_diff(
     after_ids = {a["id"] for a in after.get("approvals", []) if a.get("id")}
 
     added = [
-        a["name"] for a in after.get("approvals", [])
+        a["name"]
+        for a in after.get("approvals", [])
         if a.get("id") not in before_ids and a.get("name")
     ]
     removed = [
-        a["name"] for a in before.get("approvals", [])
+        a["name"]
+        for a in before.get("approvals", [])
         if a.get("id") not in after_ids and a.get("name")
     ]
 
@@ -142,7 +143,7 @@ def _compute_diff(
         for d in a.get("required_documents", []):
             after_doc_set.add(d)
 
-    added_docs = sorted(list(after_doc_set - before_doc_set))
+    added_docs = sorted(after_doc_set - before_doc_set)
 
     days_change = after.get("statutory_days", 0) - before.get("statutory_days", 0)
     fee_change = float(after.get("indicative_fee_inr", 0) - before.get("indicative_fee_inr", 0))

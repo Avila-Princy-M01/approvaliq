@@ -4,12 +4,10 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock, patch
 
-import pytest
-from fastapi.testclient import TestClient
-
 from app.database import get_db
 from app.main import app
 from app.routers.simulation import _aggregate_checklist, _compute_diff
+from fastapi.testclient import TestClient
 
 client = TestClient(app)
 
