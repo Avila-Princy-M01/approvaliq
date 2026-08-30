@@ -46,14 +46,12 @@ export function DecisionPanel({
   const submitDecision = async (action: string, reasonValue: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch("/api/officer/decision", {
+      const response = await fetch(`/api/officer/${applicationId}/decision`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          applicationId,
-          action,
+          action: action === "approve" ? "approve" : action === "clarification_requested" ? "request-clarification" : action,
           reason: reasonValue || undefined,
-          officerName: "Officer (Demo)",
         }),
       });
 

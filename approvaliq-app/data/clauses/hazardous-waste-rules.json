@@ -1,0 +1,17 @@
+{
+  "sourceTitle": "Hazardous and Other Wastes (Management and Transboundary Movement) Rules, 2016",
+  "authority": "Ministry of Environment, Forest and Climate Change / Maharashtra Pollution Control Board",
+  "version": "2016 (as amended 2019)",
+  "sourceUrl": "https://cpcb.nic.in/hazardous-waste/",
+  "lastVerified": "2026-08-29",
+  "clauses": [
+    {
+      "clauseId": "mpcb/hazardous-waste-rules-2016/rule-5",
+      "clause": "Rule 5",
+      "page": null,
+      "heading": "Authorisation for hazardous waste",
+      "text": "Every occupier generating hazardous waste listed in Schedule I, II, or III shall obtain authorisation from the State Pollution Control Board.",
+      "verificationStatus": "needs-review"
+    }
+  ]
+}

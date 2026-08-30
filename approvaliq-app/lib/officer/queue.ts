@@ -210,6 +210,19 @@ function buildQueueItem(snapshot: ApplicationSnapshot): OfficerQueueItem {
     topIssue: string | null;
   };
 
+  // Advisory recommendation — the officer decides; the system suggests.
+  // "Advisory" in the UI. This framing is what makes this deployable
+  // rather than alarming to a government audience.
+  const topIssue = submissionRiskWithIssue.topIssue ?? null;
+  const hasBlockingIssue = dryRunResult.status === "blocked";
+  const recommendation = hasBlockingIssue && topIssue
+    ? {
+        action: "request-clarification",
+        rationale: topIssue,
+        advisoryOnly: true as const,
+      }
+    : undefined;
+
   return {
     applicationId,
     companyName: profile.companyName ?? "Unknown",
@@ -218,9 +231,10 @@ function buildQueueItem(snapshot: ApplicationSnapshot): OfficerQueueItem {
     submissionRisk: submissionRisk.score,
     regulatoryScrutiny: regulatoryScrutiny.level,
     readinessScore: dryRunResult.readiness.overall,
-    topIssue: submissionRiskWithIssue.topIssue ?? null,
+    topIssue,
     evidence: dryRunResult.contradictions[0]?.documents ?? [],
     status: statusFromAudit(applicationId),
+    recommendation,
   };
 }
 

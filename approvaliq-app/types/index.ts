@@ -184,6 +184,12 @@ export interface DocumentRiskSignals {
   evidence: string[];
 }
 
+export interface OfficerRecommendation {
+  action: string;
+  rationale: string;
+  advisoryOnly: true;
+}
+
 export interface OfficerQueueItem {
   applicationId: string;
   companyName: string;
@@ -195,6 +201,7 @@ export interface OfficerQueueItem {
   topIssue: string | null;
   evidence: string[];
   status: "pending" | "clarification-requested" | "approved" | "rejected";
+  recommendation?: OfficerRecommendation;
 }
 
 export interface ChangeImpactResult {

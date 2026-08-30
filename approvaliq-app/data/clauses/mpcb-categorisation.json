@@ -1,0 +1,33 @@
+{
+  "sourceTitle": "Environment (Protection) Act, 1986 — MPCB Industry Categorisation",
+  "authority": "Maharashtra Pollution Control Board / Ministry of Environment, Forest and Climate Change",
+  "version": "as amended",
+  "sourceUrl": "https://mpcb.gov.in",
+  "lastVerified": "2026-08-29",
+  "clauses": [
+    {
+      "clauseId": "mpcb/water-act-1974/section-25",
+      "clause": "Section 25, Water (Prevention and Control of Pollution) Act, 1974",
+      "page": null,
+      "heading": "Consent to Establish (Water)",
+      "text": "No person shall, without the previous consent of the State Board, establish or take any steps to establish any industry which is likely to discharge sewage or trade effluent into a stream.",
+      "verificationStatus": "needs-review"
+    },
+    {
+      "clauseId": "mpcb/air-act-1981/section-21",
+      "clause": "Section 21, Air (Prevention and Control of Pollution) Act, 1981",
+      "page": null,
+      "heading": "Consent to Establish (Air)",
+      "text": "No person shall, without the previous consent of the State Board, establish or operate any industrial plant in an air pollution control area.",
+      "verificationStatus": "needs-review"
+    },
+    {
+      "clauseId": "mpcb/env-protection-act-1986/schedule-1",
+      "clause": "Schedule I (Industry Category List)",
+      "page": null,
+      "heading": "Industry pollution category classification",
+      "text": "Industries are classified as Red, Orange, Green, or White based on their pollution potential. Category determines the type of environmental consent required.",
+      "verificationStatus": "needs-review"
+    }
+  ]
+}

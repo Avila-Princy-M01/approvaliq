@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { QueueTable } from "@/components/officer/QueueTable";
 import type { OfficerQueueItem } from "@/types";
 
-export default function OfficerQueuePage() {
+function OfficerQueueContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialTab = searchParams.get("tab") === "all" ? "all" : "pending";
@@ -88,5 +88,13 @@ export default function OfficerQueuePage() {
         </Tabs>
       </div>
     </div>
+  );
+}
+
+export default function OfficerQueuePage() {
+  return (
+    <Suspense fallback={<div className="container mx-auto py-8 px-4 max-w-7xl">Loading dashboard...</div>}>
+      <OfficerQueueContent />
+    </Suspense>
   );
 }

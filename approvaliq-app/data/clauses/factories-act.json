@@ -1,0 +1,33 @@
+{
+  "sourceTitle": "The Factories Act, 1948",
+  "authority": "Government of India",
+  "version": "as amended",
+  "sourceUrl": "https://labour.gov.in/sites/default/files/TheFactoriesAct1948.pdf",
+  "lastVerified": "2026-08-29",
+  "clauses": [
+    {
+      "clauseId": "dgfasli/factories-act-1948/section-2m",
+      "clause": "Section 2(m)",
+      "page": null,
+      "heading": "Definition of factory",
+      "text": "A 'factory' means any premises where manufacturing process is carried on and where 10 or more workers are working with the aid of power, or 20 or more workers are working without the aid of power.",
+      "verificationStatus": "needs-review"
+    },
+    {
+      "clauseId": "dgfasli/factories-act-1948/section-6",
+      "clause": "Section 6",
+      "page": null,
+      "heading": "Approval, licensing and registration of factories",
+      "text": "No person shall construct or take possession of a factory or continue to carry on business in a factory unless there has been obtained from the Chief Inspector or the State Government where required, a license in the prescribed manner.",
+      "verificationStatus": "needs-review"
+    },
+    {
+      "clauseId": "dgfasli/factories-act-1948/section-85",
+      "clause": "Section 85",
+      "page": null,
+      "heading": "Power to apply Act to certain establishments",
+      "text": "The State Government may, by notification in the Official Gazette, declare that any establishment carrying on any manufacturing process shall be deemed to be a factory within the meaning of this Act.",
+      "verificationStatus": "needs-review"
+    }
+  ]
+}

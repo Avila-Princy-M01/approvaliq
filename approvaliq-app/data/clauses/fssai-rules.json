@@ -1,0 +1,33 @@
+{
+  "sourceTitle": "Food Safety and Standards (Licensing and Registration) Regulations, 2011",
+  "authority": "Food Safety and Standards Authority of India (FSSAI)",
+  "version": "as amended 2024",
+  "sourceUrl": "https://www.fssai.gov.in",
+  "lastVerified": "2026-08-29",
+  "clauses": [
+    {
+      "clauseId": "fssai/registration-turnover",
+      "clause": "Regulation 2.1 — Registration",
+      "page": null,
+      "heading": "FSSAI Registration (small food businesses)",
+      "text": "Food businesses with annual turnover up to ₹12 lakh are required to obtain only a Registration Certificate (not a licence) under these regulations.",
+      "verificationStatus": "needs-review"
+    },
+    {
+      "clauseId": "fssai/state-licence-turnover",
+      "clause": "Regulation 2.2 — State Licence",
+      "page": null,
+      "heading": "FSSAI State Licence",
+      "text": "Food businesses with annual turnover above ₹12 lakh and up to ₹20 crore must obtain a State FSSAI Licence from the designated State Licensing Authority.",
+      "verificationStatus": "needs-review"
+    },
+    {
+      "clauseId": "fssai/central-licence-turnover",
+      "clause": "Regulation 2.3 — Central Licence",
+      "page": null,
+      "heading": "FSSAI Central Licence",
+      "text": "Food businesses with annual turnover exceeding ₹20 crore, or operating in multiple states, or engaged in import/export, must obtain a Central FSSAI Licence.",
+      "verificationStatus": "needs-review"
+    }
+  ]
+}
